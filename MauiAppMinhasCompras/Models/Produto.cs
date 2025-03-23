@@ -4,7 +4,7 @@ namespace MauiAppMinhasCompras.Models;
 
 public class Produto
 {
-    string _descricao;
+    string? _descricao;
     double _quantidade;
     double _preco;
 
@@ -17,15 +17,39 @@ public class Produto
         {
             if (value == null)
             {
-                throw new Exception("Por favor, preencha a descrição");
+                throw new Exception("Por favor, preencha o campo Descrição");
             }
 
             _descricao = value;
         }
     }
     public double Quantidade
-    { get; set; }
-    public double Preco { get; set; }
+    {
+        get => _quantidade;
+        set
+        {
+            if (value < 1)
+            {
+                throw new ArgumentException("Por favor, preencha o campo Quantidade");
+            }
+
+            _quantidade = value;
+        }
+    }
+    public double Preco
+    {
+        get => _preco;
+        set
+        {
+            if (value < 1)
+            {
+                throw new ArgumentException("Por favor, preencha o campo Preço");
+            }
+
+            _preco = value;
+        }
+    }
+
     public double Total { get => Quantidade * Preco; }
 }
 
